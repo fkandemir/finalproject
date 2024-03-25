@@ -47,7 +47,7 @@
         }
 
         .sub-menu {
-            display: none;
+            /*display: none;*/
             padding-left: 20px;
             padding-bottom: 20px;
         }
@@ -104,6 +104,32 @@
             content: '|';
             margin-left: 12px;
         }
+        .logout_button {
+            background-color: beige;
+            width: 20px;
+        }
+        .input-field {
+            width: 95%;
+            padding: 10px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            background: #f1f1f1;
+        }
+
+        .input-field:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+        #submitbtn {
+            width: 97%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
 
     </style>
 </head>
@@ -125,7 +151,7 @@
         </div>
         <a href="#">Inventory</a>
         <a href="#">Profile</a>
-        <a href="login">Logout</a>
+        <a href="logout_interface">Logout</a>
     </div>
 
     <div class="content">
@@ -133,7 +159,7 @@
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Add Car</button>
+            <button type="submit" id="submitbtn">Add Car</button>
         </form>
     </div>
 
