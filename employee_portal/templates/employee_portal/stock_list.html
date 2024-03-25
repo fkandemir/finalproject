@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Employee Portal</title>
+    <title>Stock</title>
     <style>
         /* CSS styles for navigation bar and footer */
         body {
@@ -74,13 +74,6 @@
             display: block;
             /* Show sub-menu when active class is added */
         }
-
-        .content {
-            flex: 1;
-            margin-left: 200px;
-            padding: 20px;
-        }
-
         footer {
             background-color: #f5f5f5;
             height: 50px;
@@ -104,7 +97,43 @@
             content: '|';
             margin-left: 12px;
         }
+        .logout_button {
+            background-color: beige;
+            width: 20px;
+        }
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around; /* This will space out your cards nicely */
+            margin-left: 200px; /* Adjusted to ensure space for the sidebar */
+            padding: 20px;
+        }
 
+        .car-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            width: calc(30% - 30px); /* Adjust the width for 2 cards */
+        }
+        .car-card h2 {
+            font-size: 20px;
+            color: #333;
+        }
+        .car-detail {
+            margin-bottom: 10px;
+            color: #666;
+        }
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+            }
+            .car-card {
+                width: 90%;
+            }
+        }
+    
     </style>
 </head>
 <body>
@@ -126,12 +155,23 @@
         <a href="stock_list">Inventory</a>
         <a href="#">Profile</a>
         <a href="logout_interface">Logout</a>
-        </form>
     </div>
-
     <div class="content">
-        <h1>Employee Portal Home Page</h1>
-        <p>This is the home page for the employee portal. On this page, there are tutorials for using this portal.</p>
+        {% for car in cars %}
+            <div class="car-card">
+                <h2>{{ car.brand }} {{ car.model }}</h2>
+                <p class="car-detail">ID: {{ car.id }}</p>
+                <p class="car-detail">Model Year: {{ car.model_year }}</p>
+                <p class="car-detail">Kilometres: {{ car.kilometres }}</p>
+                <p class="car-detail">Color: {{ car.color }}</p>
+                <p class="car-detail">Engine: {{ car.engine }}</p>
+                <p class="car-detail">Fuel: {{ car.fuel }}</p>
+                <p class="car-detail">Doors: {{ car.doors }}</p>
+                <p class="car-detail">Gearbox: {{ car.gearbox }}</p>
+                <p class="car-detail">Price: {{ car.price }}</p>
+            </div>
+        {% endfor %}
+        </div>
     </div>
 
     <footer>

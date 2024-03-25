@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CarForm
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+from .models import Car
 
 # Create your views here.
 
@@ -24,4 +26,8 @@ def addCarView(request):
     else:
         form = CarForm()
     return render(request, 'employee_portal/addCar.html', {'form': form})
-    #return render(request, "employee_portal/addCar.html")
+
+@login_required
+def stock_list(request):
+    cars = Car.objects.all()  # Fetch all car objects from the database
+    return render(request, 'employee_portal/stock_list.html', {'cars': cars})
