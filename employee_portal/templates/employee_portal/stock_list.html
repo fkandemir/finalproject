@@ -115,6 +115,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             padding: 20px;
             width: calc(30% - 30px); /* Adjust the width for 2 cards */
+            margin-bottom: 20px;
         }
         .car-card h2 {
             font-size: 20px;
@@ -149,8 +150,8 @@
         <a>Asset Services</a>
         <div class="sub-menu">
             <a href="addCar">Add Car</a>
-            <a href="#">Delete Car</a>
-            <a href="#">Update Car</a>
+            <a href="deleteCar">Delete Car</a>
+            <a href="editCar">Update Car</a>
         </div>
         <a href="stock_list">Inventory</a>
         <a href="#">Profile</a>
@@ -162,13 +163,13 @@
                 <h2>{{ car.brand }} {{ car.model }}</h2>
                 <p class="car-detail">ID: {{ car.id }}</p>
                 <p class="car-detail">Model Year: {{ car.model_year }}</p>
-                <p class="car-detail">Kilometres: {{ car.kilometres }}</p>
+                <p class="car-detail">Kilometres: {{ car.kilometres }} km</p>
                 <p class="car-detail">Color: {{ car.color }}</p>
-                <p class="car-detail">Engine: {{ car.engine }}</p>
-                <p class="car-detail">Fuel: {{ car.fuel }}</p>
+                <p class="car-detail">Engine: {{ car.engine_capacity }} L</p>
+                <p class="car-detail">Fuel: {{ car.fuel_type }}</p>
                 <p class="car-detail">Doors: {{ car.doors }}</p>
-                <p class="car-detail">Gearbox: {{ car.gearbox }}</p>
-                <p class="car-detail">Price: {{ car.price }}</p>
+                <p class="car-detail">Gearbox: {{ car.gearbox_type }}</p>
+                <p class="car-detail">Price: {{ car.price }} GBP</p>
             </div>
         {% endfor %}
         </div>

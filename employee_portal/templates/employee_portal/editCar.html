@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit a Car</title>
+    <style>
+        /* CSS styles for navigation bar and footer */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure the body takes at least the height of the viewport */
+        }
+
+        .sidebar {
+            height: 84%;
+            width: 190px;
+            position: absolute;
+            margin-left: 10px;
+            margin-top: 10px;
+            background-color: #333;
+            overflow-x: hidden;
+            padding-top: 20px;
+            border-radius: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar a {
+            padding: 15px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #fff;
+            /* White text color */
+            display: block;
+            transition: all 0.3s ease;
+            /* Smooth transition effect */
+            cursor: default;
+        }
+
+        .sidebar a:hover {
+            background-color: #555;
+        }
+
+        .sub-menu {
+            display: none;
+            padding-left: 20px;
+            padding-bottom: 20px;
+        }
+
+        .sub-menu a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #ccc;
+            /* Lighter text color */
+            display: block;
+            transition: all 0.3s ease;
+            /* Smooth transition effect */
+        }
+
+        .sub-menu a:hover {
+            background-color: #444;
+            /* Darker background color on hover */
+            color: #fff;
+            /* White text color on hover */
+        }
+
+        .sub-menu.active {
+            display: block;
+            /* Show sub-menu when active class is added */
+        }
+
+        .content {
+            flex: 1;
+            margin-left: 200px;
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #f5f5f5;
+            height: 50px;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.1);
+            margin-top: auto;
+        }
+        footer a {
+            color: #333;
+            /* Darker text color */
+            text-decoration: none;
+            margin: 0 3px;
+        }
+
+        footer a:not(:last-child):after {
+            content: '|';
+            margin-left: 12px;
+        }
+        #carCardContainer {
+            background-color: #fff;
+            display: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            width: calc(30% - 30px); /* Adjust the width for 2 cards */
+            margin-bottom: 20px;
+            margin-left: auto;
+            margin-right: auto; /* Center the card */
+        }
+        #carIdInput {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        #findCarBtn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        #findCarBtn:hover {
+            background-color: #0056b3;
+        }
+        .input-field {
+            width: 95%;
+            padding: 10px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            background: #f1f1f1;
+        }
+
+        .input-field:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+        #editCarBtn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #87A96B;
+            color: white;
+            cursor: pointer;
+        }
+
+        #editCarBtn:hover {
+            background-color: #0056b3;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="home">Home</a>
+        <a>Client Services</a>
+            <div class="sub-menu">
+                <a href="#">Add Client</a>
+                <a href="#">Delete Client</a>
+                <a href="#">Update Client</a>
+                <a href="#">Client List</a>
+            </div>
+        <a>Asset Services</a>
+        <div class="sub-menu">
+            <a href="addCar">Add Car</a>
+            <a href="deleteCar">Delete Car</a>
+            <a href="editCar">Update Car</a>
+        </div>
+        <a href="stock_list">Inventory</a>
+        <a href="#">Profile</a>
+        <a href="logout_interface">Logout</a>
+    </div>
+
+    <div class="content">
+        <h2>Edit a Car</h2>
+        <input type="text" id="carIdInput" placeholder="Enter Car ID">
+        <button id="findCarBtn">Find Car</button>
+
+        <div id="carCardContainer" style="margin-top: 20px;">
+            <!-- The car details will be displayed here -->
+        </div>
+    </div>
+
+    <footer>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <p>&copy; 2024 Employee Portal. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript to toggle sub-menu visibility
+        const subMenus = document.querySelectorAll('.sidebar .sub-menu');
+
+        subMenus.forEach(subMenu => {
+            const parentLink = subMenu.previousElementSibling;
+            parentLink.addEventListener('click', () => {
+                subMenu.classList.toggle('active');
+            });
+        });
+        // JavaScript to find a car by id
+        document.getElementById('findCarBtn').addEventListener('click', function() {
+            const carId = document.getElementById('carIdInput').value;
+            console.log(carId);
+            if (carId) {
+                //console.log("hello from if");
+                fetch(`find_car/?id=${carId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Car not found');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        //console.log("hello from second part");
+                        const container = document.getElementById('carCardContainer');
+                        container.style.display = 'block';
+                        container.innerHTML = `
+                            <div>
+                                <form id="updateCarForm">
+                                    <h3>Edit Car: ${data.brand} ${data.model}</h3>
+                                    <input class= input-field type="hidden" name="id" value="${data.id}">
+                                    <label class= label-field for="brand">Brand:</label>
+                                    <input class= input-field type="text" id="brand" name="brand" value="${data.brand}"><br>
+                                    <label class= label-field for="model">Model:</label>
+                                    <input class= input-field type="text" id="model" name="model" value="${data.model}"><br>
+                                    <label class= label-field for="model_year">Model Year:</label>
+                                    <input class= input-field type="text" id="model_year" name="model_year" value="${data.model_year}"><br>
+                                    <label class= label-field for="kilometres">Kilometres:</label>
+                                    <input class= input-field type="text" id="kilometres" name="kilometres" value="${data.kilometres}"><br>
+                                    <label class= label-field for="engine_capacity">Engine Capacity:</label>
+                                    <input class= input-field type="text" id="engine_capacity" name="engine_capacity" value="${data.engine_capacity}"><br>
+                                    <label class= label-field for="fuel_type">Fuel Type:</label>
+                                    <select class= input-field id="fuel_type" name="fuel_type">
+                                        <option value="Petrol" ${data.fuel_type === 'Petrol' ? 'selected' : ''}>Petrol</option>
+                                        <option value="Diesel" ${data.fuel_type === 'Diesel' ? 'selected' : ''}>Diesel</option>
+                                        <option value="Hybrid" ${data.fuel_type === 'Hybrid' ? 'selected' : ''}>Hybrid</option>
+                                        <option value="Electric" ${data.fuel_type === 'Electric' ? 'selected' : ''}>Electric</option>
+                                    </select><br>
+                                    <label class= label-field for="doors">Doors:</label>
+                                    <input class= input-field type="text" id="doors" name="doors" value="${data.doors}"><br>
+                                    <label class= label-field for="gearbox_type">Gearbox Type:</label>
+                                    <select class= input-field id="gearbox_type" name="gearbox_type">
+                                        <option value="Automatic" ${data.gearbox_type === 'Automatic' ? 'selected' : ''}>Automatic</option>
+                                        <option value="Manual" ${data.gearbox_type === 'Manual' ? 'selected' : ''}>Manual</option>
+                                    </select><br>
+                                    <label class= label-field for="price">Price:</label>
+                                    <input class= input-field type="text" id="price" name="price" value="${data.price}"><br>
+                                    <button id=editCarBtn type="button" onclick="updateCar(${data.id})">Update Car</button>
+                                </form> 
+                            </div>
+                        `;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        document.getElementById('carCardContainer').innerHTML = '<p>Car not found.</p>';
+                    });
+            }
+        });
+        function updateCar(carId) {
+            const formData = new FormData(document.getElementById('updateCarForm'));
+            fetch(`update_car/${carId}/`, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to update car');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert('Car updated successfully');
+                document.getElementById('carCardContainer').style.display = 'none';
+                // Optionally clear the form or redirect the user
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+    
+    </script>
+</body>
+</html>
