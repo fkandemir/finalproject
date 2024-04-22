@@ -5,6 +5,9 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('home', views.index, name='home'),
     path('login', auth_views.LoginView.as_view(template_name='employee_portal/login.html'), name='login'),
+    path('profile', views.employee_profile, name='profile'),
+    path('editProfile', views.editProfileView, name='editProfile'),
+    path('profile/update/', views.update_profile, name='update_profile'),
     path('addCar', views.addCarView, name='addCar'),
     path('deleteCar', views.deleteCarView, name='deleteCar'),
     path('editCar', views.editCarView, name='editCar'),
@@ -14,4 +17,5 @@ urlpatterns = [
     path('find_car/', views.find_car, name='find_car'),
     path('delete_car/<int:car_id>/', views.delete_car, name='delete_car'),
     path('update_car/<int:car_id>/', views.update_car, name='update_car'),
+
 ]

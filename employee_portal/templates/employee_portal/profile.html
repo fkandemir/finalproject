@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Employee Portal</title>
+    <title>Profile</title>
     <style>
         /* CSS styles for navigation bar and footer */
         body {
@@ -104,6 +104,19 @@
             content: '|';
             margin-left: 12px;
         }
+        #editbtn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #87A96B;
+            color: white;
+            cursor: pointer;
+        }
+
+        #editbtn:hover {
+            background-color: #0056b3;
+        }
 
     </style>
 </head>
@@ -130,8 +143,11 @@
     </div>
 
     <div class="content">
-        <h1>Employee Portal Home Page</h1>
-        <p>This is the home page for the employee portal. On this page, there are tutorials for using this portal.</p>
+        <h1>Profile</h1>
+        <p><strong>Full Name:</strong> {{ employee.name }} {{ employee.surname }}</p>
+        <p><strong>Email:</strong> {{ employee.user.email }}</p>
+        <p><strong>Phone Number:</strong> {{ employee.phone_number }}</p>
+        <button onclick="window.location.href='http://127.0.0.1:8000/employee_portal/editProfile'" id="editbtn">Edit Profile</button>
     </div>
 
     <footer>

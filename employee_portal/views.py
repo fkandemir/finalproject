@@ -4,13 +4,46 @@ from .forms import CarForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST, require_http_methods
 from django.views.decorators.csrf import csrf_exempt
-from .models import Car
-
+from .models import Car, Employee
+from django.contrib import messages
 # Create your views here.
 
 @login_required
 def index(request):
     return render(request, "employee_portal/index.html")
+
+@login_required
+def employee_profile(request):
+    try:
+        employee = request.user.employee
+    except Employee.DoesNotExist:
+        messages.error(request, "No employee profile found for this user.")
+        return redirect('home')
+    return render(request, 'employee_portal/profile.html', {'employee': employee})
+
+
+@login_required
+def editProfileView(request):
+    employee = request.user.employee
+    return render(request, "employee_portal/editProfile.html", {'employee': employee}) 
+
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        user = request.user
+        employee = user.employee
+
+        user.email = request.POST.get('email')
+        user.save()
+        employee.name = request.POST.get('name')
+        employee.surname = request.POST.get('surname')
+        employee.phone_number = request.POST.get('phone_number')
+        employee.save()
+
+        messages.success(request, "Your profile has been updated.")
+        return redirect('profile')
+    else:
+        return render(request, 'edit_profile.html', {'employee': user.employee})
 
 #def login(request):
     #return render(request, "employee_portal/login.html")

@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Car
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
-from .models import Employee
+from .models import Employee, Client
 
 # Register your models here.
 
