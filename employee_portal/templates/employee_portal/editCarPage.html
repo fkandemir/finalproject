@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Car</title>
+    <!-- Import Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --hover-color: #34495e;
+            --text-color: #ecf0f1;
+            --background-color: #f7f7f7;
+            --content-background-color: #fff;
+            --footer-background-color: #2c3e50;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .sidebar {
+            height: 100%;
+            width: 230px;
+            position: fixed;
+            background-color: var(--primary-color);
+            overflow-x: hidden;
+            padding-top: 20px;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        .sidebar a {
+            padding: 25px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: var(--text-color);
+            display: block;
+            transition: all 0.3s ease;
+        }
+        .sidebar a:hover {
+            background-color: var(--hover-color);
+            color: #fff;
+        }
+        .sub-menu {
+            display: none;
+            padding-left: 40px;
+        }
+        .sub-menu.active {
+            display: block;
+        }
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-left: 250px;
+            padding: 20px;
+            background: var(--content-background-color);
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            transition: margin-left 0.3s ease;
+        }
+        .car-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            width: calc(30% - 30px);
+            margin-bottom: 20px;
+        }
+        .car-card img {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            border-radius: 5px;
+        }
+        .car-card h2 {
+            font-size: 20px;
+            color: #333;
+        }
+        .car-detail {
+            margin-bottom: 10px;
+            color: #666;
+        }
+        footer {
+            background-color: var(--footer-background-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.1);
+            margin-top: auto;
+        }
+        footer a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 3px;
+        }
+        footer a:not(:last-child):after {
+            content: '|';
+            margin-left: 12px;
+        }
+        #deleteCarBtn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #9e1b32;
+            color: white;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+            }
+            .car-card {
+                width: 90%;
+            }
+        }
+        /* Add SVG icons to the sidebar */
+        .icon {
+            padding-right: 20px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="/employee_portal/home"><span class="icon">🏠</span>Home</a>
+        <a id="asset-services"><span class="icon">🚗</span>Asset Services</a>
+        <div class="sub-menu">
+            <a href="/employee_portal/addCar">Add Car</a>
+            <a href="/employee_portal/searchCar">Search Car</a>
+            <a href="/employee_portal/deleteCar">Delete Car</a>
+            <a href="/employee_portal/editCar">Update Car</a>
+        </div>
+        <a href="/employee_portal/stock_list"><span class="icon">📦</span>Inventory</a>
+        <a href="/employee_portal/profile"><span class="icon">👤</span>Profile</a>
+        <a href="/employee_portal/logout_interface"><span class="icon">🔒</span>Logout</a>
+    </div>
+    <div class="content">
+        <h1>Edit Car</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+    <footer>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <p>&copy; 2024 Elite Motors Employee Portal. All rights reserved.</p>
+    </footer>
+    <script>
+        // JavaScript to toggle sub-menu visibility
+        const subMenus = document.querySelectorAll('.sidebar .sub-menu');
+        subMenus.forEach(subMenu => {
+            const parentLink = subMenu.previousElementSibling;
+            parentLink.addEventListener('click', () => {
+                subMenu.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

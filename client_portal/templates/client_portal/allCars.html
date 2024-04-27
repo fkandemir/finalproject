@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars</title>
+    <!-- Import Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --hover-color: #34495e;
+            --text-color: #ecf0f1;
+            --background-color: #f7f7f7;
+            --content-background-color: #fff;
+            --footer-background-color: #2c3e50;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: var(--primary-color);
+            color: var(--text-color);
+            padding: 10px 20px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        nav ul li {
+            margin-right: 40px;
+        }
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        nav .signup-button, nav .login-button {
+            background: var(--hover-color);
+            padding: 5px 15px;
+            border-radius: 5px;
+            margin-left: auto;
+        }
+        main {
+            flex: 1;
+            padding: 20px;
+            background: var(--content-background-color);
+        }
+        .car-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+        .car-card-info {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            margin-bottom: 20px;
+            padding: 10px;
+            margin-left: 400px;
+        }
+        .car-card img {
+            width: 200px; /* Fixed width for the image */
+            height: auto;
+            max-height: 150px;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+        .car-details {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .car-detail {
+            margin-bottom: 5px;
+            margin-right: 70px;
+            color: #666;
+        }
+        .car-title {
+            margin-right: 80px;
+        }
+        footer {
+            background: var(--footer-background-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 10px 20px;
+            width: 100%;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.1);
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/client_portal/client-home">Home</a></li>
+                <li><a href="/client_portal/carList">Cars</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li class="signup-button"><a href="/signup">Sign Up</a></li>
+                <li class="login-button"><a href="/login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="content">
+            <h1>{{ brand }} Cars</h1>
+            <div class="car-card-info">
+                <p class="car-detail">Year</p>
+                <p class="car-detail">Kilometres</p>
+                <p class="car-detail">Color</p>
+                <p class="car-detail">Engine</p>
+                <p class="car-detail">Fuel</p>
+                <p class="car-detail">Doors</p>
+                <p class="car-detail">Gearbox</p>
+                <p class="car-detail">Price</p>
+            </div>
+            {% for car in cars %}
+            <div class="car-card">
+                <img src="{{ car.image.url }}" alt="Image of {{ car.brand }} {{ car.model }}">
+                <h2 class="car-title">{{ car.brand }} {{ car.model }}</h2>
+                <h3 class="car-detail">{{ car.model_year }}</h3>
+                <h3 class="car-detail">{{ car.kilometres }}km</h3>
+                <h3 class="car-detail">{{ car.color }}</h2>
+                <h3 class="car-detail">{{ car.engine_capacity }}L</h3>
+                <h3 class="car-detail">{{ car.fuel_type }}</h3>
+                <h3 class="car-detail">{{ car.doors }}</h3>
+                <h3 class="car-detail">{{ car.gearbox_type }}</h3>
+                <h3 class="car-detail">{{ car.price }}GBP</h3>
+            </div>
+            {% empty %}
+            <p>No cars found for {{ brand }}.</p>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; 2024 Elite Motors. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Simple script file
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded!');
+        });
+    </script>
+</body>
+</html>

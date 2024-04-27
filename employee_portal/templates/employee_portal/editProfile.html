@@ -4,89 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
+    <!-- Import Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* CSS styles for navigation bar and footer */
+        :root {
+            --primary-color: #2c3e50;
+            --hover-color: #34495e;
+            --text-color: #ecf0f1;
+            --background-color: #f7f7f7;
+            --content-background-color: #fff;
+            --footer-background-color: #2c3e50;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Open Sans', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f2f2f2;
+            background-color: var(--background-color);
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Ensure the body takes at least the height of the viewport */
+            min-height: 100vh;
         }
-
         .sidebar {
-            height: 84%;
-            width: 190px;
-            position: absolute;
-            margin-left: 10px;
-            margin-top: 10px;
-            background-color: #333;
+            height: 100%;
+            width: 230px;
+            position: fixed;
+            background-color: var(--primary-color);
             overflow-x: hidden;
             padding-top: 20px;
-            border-radius: 20px;
-            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
         }
-
         .sidebar a {
-            padding: 15px 20px;
+            padding: 25px 20px;
             text-decoration: none;
             font-size: 18px;
-            color: #fff;
-            /* White text color */
+            color: var(--text-color);
             display: block;
             transition: all 0.3s ease;
-            /* Smooth transition effect */
-            cursor: default;
         }
-
         .sidebar a:hover {
-            background-color: #555;
-            /* Darker background color on hover */
+            background-color: var(--hover-color);
+            color: #fff;
         }
-
         .sub-menu {
             display: none;
-            padding-left: 20px;
-            padding-bottom: 20px;
+            padding-left: 40px;
         }
-
-        .sub-menu a {
-            padding: 10px 20px;
-            text-decoration: none;
-            font-size: 16px;
-            color: #ccc;
-            /* Lighter text color */
-            display: block;
-            transition: all 0.3s ease;
-            /* Smooth transition effect */
-        }
-
-        .sub-menu a:hover {
-            background-color: #444;
-            /* Darker background color on hover */
-            color: #fff;
-            /* White text color on hover */
-        }
-
         .sub-menu.active {
             display: block;
-            /* Show sub-menu when active class is added */
         }
-
         .content {
             flex: 1;
-            margin-left: 200px;
+            margin-left: 250px;
             padding: 20px;
+            background: var(--content-background-color);
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            transition: margin-left 0.3s ease;
         }
-
         footer {
-            background-color: #f5f5f5;
-            height: 50px;
-            color: #333;
+            background-color: var(--footer-background-color);
+            color: var(--text-color);
             text-align: center;
-            padding: 20px;
+            padding: 10px;
             width: 100%;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
@@ -94,73 +76,86 @@
             margin-top: auto;
         }
         footer a {
-            color: #333;
-            /* Darker text color */
+            color: var(--text-color);
             text-decoration: none;
             margin: 0 3px;
         }
-
         footer a:not(:last-child):after {
             content: '|';
             margin-left: 12px;
         }
-
+        input[type="text"], input[type="email"], input[type="number"], select, button {
+            width: 97%;
+            padding: 10px;
+            margin-bottom: 20px;
+            background: #f1f1f1;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #568203;
+            margin-top: 20px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #4B5320;
+        }
+        /* Add SVG icons to the sidebar */
+        .icon {
+            padding-right: 20px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
     <div class="sidebar">
-        <a href="home">Home</a>
-        <a>Client Services</a>
-            <div class="sub-menu">
-                <a href="addClient">Add Client</a>
-                <a href="deleteClient">Delete Client</a>
-                <a href="editClient">Update Client</a>
-                <a href="client_list">Client List</a>
-            </div>
-        <a>Asset Services</a>
+        <a href="/employee_portal/home"><span class="icon">🏠</span>Home</a>
+        <a id="asset-services"><span class="icon">🚗</span>Asset Services</a>
         <div class="sub-menu">
-            <a href="addCar">Add Car</a>
-            <a href="deleteCar">Delete Car</a>
-            <a href="editCar">Update Car</a>
+            <a href="/employee_portal/addCar">Add Car</a>
+            <a href="/employee_portal/searchCar">Search Car</a>
+            <a href="/employee_portal/deleteCar">Delete Car</a>
+            <a href="/employee_portal/editCar">Update Car</a>
         </div>
-        <a href="stock_list">Inventory</a>
-        <a href="profile">Profile</a>
-        <a href="logout_interface">Logout</a>
-        </form>
+        <a href="/employee_portal/stock_list"><span class="icon">📦</span>Inventory</a>
+        <a href="/employee_portal/profile"><span class="icon">👤</span>Profile</a>
+        <a href="/employee_portal/logout_interface"><span class="icon">🔒</span>Logout</a>
     </div>
 
     <div class="content">
         <h1>Edit Profile</h1>
-        <form action="{% url 'update_profile' %}" method="post">
+        <form action="{% url 'update_profile' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <label for="name">First Name:</label>
+            <label for="name" class="labels">First Name:</label>
             <input type="text" id="name" name="name" placeholder="Name" value="{{ employee.name }}">
-    
-            <label for="surname">Last Name:</label>
+
+            <label for="surname" class="labels">Last Name:</label>
             <input type="text" id="surname" name="surname" value="{{ employee.surname }}">
-    
-            <label for="email">Email:</label>
+
+            <label for="email" class="labels">Email:</label>
             <input type="email" id="email" name="email" value="{{ employee.user.email }}">
-    
-            <label for="phone_number">Phone Number:</label>
+
+            <label for="phone_number" class="labels">Phone Number:</label>
             <input type="text" id="phone_number" name="phone_number" value="{{ employee.phone_number }}">
-    
+
+            <label for="profile_picture" class="labels">Profile Picture:</label>
+            <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
+
             <button type="submit">Save Changes</button>
         </form>
     </div>
-    
-    
 
     <footer>
         <a href="#">About</a>
         <a href="#">Contact</a>
-        <p>&copy; 2024 Employee Portal. All rights reserved.</p>
+        <p>&copy; 2024 Elite Motors Employee Portal. All rights reserved.</p>
     </footer>
 
     <script>
         // JavaScript to toggle sub-menu visibility
         const subMenus = document.querySelectorAll('.sidebar .sub-menu');
-
         subMenus.forEach(subMenu => {
             const parentLink = subMenu.previousElementSibling;
             parentLink.addEventListener('click', () => {

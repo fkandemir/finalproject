@@ -4,88 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit a Car</title>
+    <!-- Import Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* CSS styles for navigation bar and footer */
+        :root {
+            --primary-color: #2c3e50;
+            --hover-color: #34495e;
+            --text-color: #ecf0f1;
+            --background-color: #f7f7f7;
+            --content-background-color: #fff;
+            --footer-background-color: #2c3e50;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Open Sans', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f2f2f2;
+            background-color: var(--background-color);
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Ensure the body takes at least the height of the viewport */
+            min-height: 100vh;
         }
-
         .sidebar {
-            height: 84%;
-            width: 190px;
-            position: absolute;
-            margin-left: 10px;
-            margin-top: 10px;
-            background-color: #333;
+            height: 100%;
+            width: 230px;
+            position: fixed;
+            background-color: var(--primary-color);
             overflow-x: hidden;
             padding-top: 20px;
-            border-radius: 20px;
-            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
         }
-
         .sidebar a {
-            padding: 15px 20px;
+            padding: 25px 20px;
             text-decoration: none;
             font-size: 18px;
-            color: #fff;
-            /* White text color */
+            color: var(--text-color);
             display: block;
             transition: all 0.3s ease;
-            /* Smooth transition effect */
-            cursor: default;
         }
-
         .sidebar a:hover {
-            background-color: #555;
+            background-color: var(--hover-color);
+            color: #fff;
         }
-
         .sub-menu {
             display: none;
-            padding-left: 20px;
-            padding-bottom: 20px;
+            padding-left: 40px;
         }
-
-        .sub-menu a {
-            padding: 10px 20px;
-            text-decoration: none;
-            font-size: 16px;
-            color: #ccc;
-            /* Lighter text color */
-            display: block;
-            transition: all 0.3s ease;
-            /* Smooth transition effect */
-        }
-
-        .sub-menu a:hover {
-            background-color: #444;
-            /* Darker background color on hover */
-            color: #fff;
-            /* White text color on hover */
-        }
-
         .sub-menu.active {
             display: block;
-            /* Show sub-menu when active class is added */
         }
-
         .content {
             flex: 1;
-            margin-left: 200px;
+            margin-left: 250px;
             padding: 20px;
+            background: var(--content-background-color);
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            transition: margin-left 0.3s ease;
         }
-
         footer {
-            background-color: #f5f5f5;
-            height: 50px;
-            color: #333;
+            background-color: var(--footer-background-color);
+            color: var(--text-color);
             text-align: center;
-            padding: 20px;
+            padding: 10px;
             width: 100%;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
@@ -93,15 +76,34 @@
             margin-top: auto;
         }
         footer a {
-            color: #333;
-            /* Darker text color */
+            color: var(--text-color);
             text-decoration: none;
             margin: 0 3px;
         }
-
         footer a:not(:last-child):after {
             content: '|';
             margin-left: 12px;
+        }
+        input[type="text"], input[type="number"], select {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 20px;
+            background: #f1f1f1;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            width: 82%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--primary-color);
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: var(--hover-color);
         }
         #carCardContainer {
             background-color: #fff;
@@ -109,80 +111,49 @@
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             padding: 20px;
-            width: calc(30% - 30px); /* Adjust the width for 2 cards */
+            width: calc(30% - 30px);
             margin-bottom: 20px;
             margin-left: auto;
-            margin-right: auto; /* Center the card */
+            margin-right: auto;
         }
-        #carIdInput {
-            width: 100%;
-            padding: 10px;
+        #carCardContainer h3 {
+            font-size: 20px;
+            color: #333;
+        }
+        #carCardContainer img {
+            max-width: 100%;
+            height: auto;
             margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
         }
-
-        #findCarBtn {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+            }
+            .car-card {
+                width: 90%;
+            }
         }
-
-        #findCarBtn:hover {
-            background-color: #0056b3;
+        /* Add SVG icons to the sidebar */
+        .icon {
+            padding-right: 20px;
+            vertical-align: middle;
         }
-        .input-field {
-            width: 95%;
-            padding: 10px;
-            margin: 5px 0 22px 0;
-            display: inline-block;
-            background: #f1f1f1;
-        }
-
-        .input-field:focus {
-            background-color: #ddd;
-            outline: none;
-        }
-        #editCarBtn {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #87A96B;
-            color: white;
-            cursor: pointer;
-        }
-
-        #editCarBtn:hover {
-            background-color: #0056b3;
-        }
-        
     </style>
 </head>
 <body>
     <div class="sidebar">
-        <a href="home">Home</a>
-        <a>Client Services</a>
-            <div class="sub-menu">
-                <a href="addClient">Add Client</a>
-                <a href="deleteClient">Delete Client</a>
-                <a href="editClient">Update Client</a>
-                <a href="client_list">Client List</a>
-            </div>
-        <a>Asset Services</a>
+        <a href="/employee_portal/home"><span class="icon">🏠</span>Home</a>
+        <a id="asset-services"><span class="icon">🚗</span>Asset Services</a>
         <div class="sub-menu">
-            <a href="addCar">Add Car</a>
-            <a href="deleteCar">Delete Car</a>
-            <a href="editCar">Update Car</a>
+            <a href="/employee_portal/addCar">Add Car</a>
+            <a href="/employee_portal/searchCar">Search Car</a>
+            <a href="/employee_portal/deleteCar">Delete Car</a>
+            <a href="/employee_portal/editCar">Update Car</a>
         </div>
-        <a href="stock_list">Inventory</a>
-        <a href="profile">Profile</a>
-        <a href="logout_interface">Logout</a>
+        <a href="/employee_portal/stock_list"><span class="icon">📦</span>Inventory</a>
+        <a href="/employee_portal/profile"><span class="icon">👤</span>Profile</a>
+        <a href="/employee_portal/logout_interface"><span class="icon">🔒</span>Logout</a>
     </div>
 
     <div class="content">
@@ -191,27 +162,26 @@
         <button id="findCarBtn">Find Car</button>
 
         <div id="carCardContainer" style="margin-top: 20px;">
-            <!-- The car details will be displayed here -->
+            <!-- Car details will be displayed here for editing -->
         </div>
     </div>
 
     <footer>
         <a href="#">About</a>
         <a href="#">Contact</a>
-        <p>&copy; 2024 Employee Portal. All rights reserved.</p>
+        <p>&copy; 2024 Elite Motors Employee Portal. All rights reserved.</p>
     </footer>
 
     <script>
         // JavaScript to toggle sub-menu visibility
-        const subMenus = document.querySelectorAll('.sidebar .sub-menu');
+        const assetServicesLink = document.getElementById('asset-services');
+        const subMenu = assetServicesLink.nextElementSibling;
 
-        subMenus.forEach(subMenu => {
-            const parentLink = subMenu.previousElementSibling;
-            parentLink.addEventListener('click', () => {
-                subMenu.classList.toggle('active');
-            });
+        assetServicesLink.addEventListener('click', () => {
+            subMenu.classList.toggle('active');
         });
-        // JavaScript to find a car by id
+
+        // JavaScript to find and edit a car by id
         document.getElementById('findCarBtn').addEventListener('click', function() {
             const carId = document.getElementById('carIdInput').value;
             console.log(carId);
@@ -228,37 +198,39 @@
                         container.style.display = 'block';
                         container.innerHTML = `
                             <div>
+                                <img src="${data.image}.url" alt="Image of ${data.brand} ${data.model}">
+                                <h3>Edit Car: ${data.brand} ${data.model}</h3>
+                                <!-- Form for editing the car details -->
                                 <form id="updateCarForm">
-                                    <h3>Edit Car: ${data.brand} ${data.model}</h3>
-                                    <input class= input-field type="hidden" name="id" value="${data.id}">
-                                    <label class= label-field for="brand">Brand:</label>
-                                    <input class= input-field type="text" id="brand" name="brand" value="${data.brand}"><br>
-                                    <label class= label-field for="model">Model:</label>
-                                    <input class= input-field type="text" id="model" name="model" value="${data.model}"><br>
-                                    <label class= label-field for="model_year">Model Year:</label>
-                                    <input class= input-field type="text" id="model_year" name="model_year" value="${data.model_year}"><br>
-                                    <label class= label-field for="kilometres">Kilometres:</label>
-                                    <input class= input-field type="text" id="kilometres" name="kilometres" value="${data.kilometres}"><br>
-                                    <label class= label-field for="engine_capacity">Engine Capacity:</label>
-                                    <input class= input-field type="text" id="engine_capacity" name="engine_capacity" value="${data.engine_capacity}"><br>
-                                    <label class= label-field for="fuel_type">Fuel Type:</label>
-                                    <select class= input-field id="fuel_type" name="fuel_type">
+                                    <input type="hidden" name="id" value="${data.id}">
+                                    <label>Brand:</label>
+                                    <input type="text" name="brand" value="${data.brand}"><br>
+                                    <label>Model:</label>
+                                    <input type="text" name="model" value="${data.model}"><br>
+                                    <label>Model Year:</label>
+                                    <input type="number" name="model_year" value="${data.model_year}"><br>
+                                    <label>Kilometres:</label>
+                                    <input type="number" name="kilometres" value="${data.kilometres}"><br>
+                                    <label>Engine Capacity (L):</label>
+                                    <input type="number" name="engine_capacity" value="${data.engine_capacity}"><br>
+                                    <label>Fuel Type:</label>
+                                    <select name="fuel_type">
                                         <option value="Petrol" ${data.fuel_type === 'Petrol' ? 'selected' : ''}>Petrol</option>
                                         <option value="Diesel" ${data.fuel_type === 'Diesel' ? 'selected' : ''}>Diesel</option>
                                         <option value="Hybrid" ${data.fuel_type === 'Hybrid' ? 'selected' : ''}>Hybrid</option>
                                         <option value="Electric" ${data.fuel_type === 'Electric' ? 'selected' : ''}>Electric</option>
                                     </select><br>
-                                    <label class= label-field for="doors">Doors:</label>
-                                    <input class= input-field type="text" id="doors" name="doors" value="${data.doors}"><br>
-                                    <label class= label-field for="gearbox_type">Gearbox Type:</label>
-                                    <select class= input-field id="gearbox_type" name="gearbox_type">
+                                    <label>Doors:</label>
+                                    <input type="number" name="doors" value="${data.doors}"><br>
+                                    <label>Gearbox Type:</label>
+                                    <select name="gearbox_type">
                                         <option value="Automatic" ${data.gearbox_type === 'Automatic' ? 'selected' : ''}>Automatic</option>
                                         <option value="Manual" ${data.gearbox_type === 'Manual' ? 'selected' : ''}>Manual</option>
                                     </select><br>
-                                    <label class= label-field for="price">Price:</label>
-                                    <input class= input-field type="text" id="price" name="price" value="${data.price}"><br>
-                                    <button id=editCarBtn type="button" onclick="updateCar(${data.id})">Update Car</button>
-                                </form> 
+                                    <label>Price:</label>
+                                    <input type="number" name="price" value="${data.price}"><br>
+                                    <button type="submit">Update Car</button>
+                                </form>
                             </div>
                         `;
                     })
@@ -268,9 +240,12 @@
                     });
             }
         });
-        function updateCar(carId) {
-            const formData = new FormData(document.getElementById('updateCarForm'));
-            fetch(`update_car/${carId}/`, {
+
+        // JavaScript to handle the car update submission
+        document.getElementById('updateCarForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch(`update_car/${formData.get('id')}/`, {
                 method: 'POST',
                 body: formData
             })
@@ -288,9 +263,7 @@
             .catch(error => {
                 console.error('Error:', error);
             });
-        }
-
-    
+        });
     </script>
 </body>
 </html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Commercials</title>
+    <style>
+        /* CSS styles for navigation bar and footer */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-right: 40px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav ul .logout-button {
+            margin-left: auto; /* This pushes the login button to the right */
+            background: #007BFF; /* A simple blue background */
+            padding: 5px 15px;
+            border-radius: 5px;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+        }
+        
+
+    </style>
+    
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="loggedin_home">Home</a></li>
+                <li><a href="profile">Profile</a></li>
+                <li><a href="#">Cars</a></li>
+                <li><a href="#">Appointment</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li class="logout-button"><a href="logout_interface">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Welcome to Car Commercials</h1>
+        <p>This is where commercials will be showcased.</p>
+        <!-- Here you might include elements like a video player or image carousel for the commercials -->
+    </main>
+
+    <footer>
+        <p>Copyright &copy; 2024 Car Commercials. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Simple script file
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded!');
+        });
+
+    </script>
+</body>
+</html>

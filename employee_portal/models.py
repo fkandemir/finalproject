@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
@@ -13,6 +14,7 @@ class Car(models.Model):
     doors = models.IntegerField()
     gearbox_type = models.CharField(max_length=50)
     price = models.IntegerField()
+    image = models.ImageField(upload_to='cars/', blank=True, null=True)  # Allows image uploads for cars
 
     def __str__(self):
         return f"{self.brand} {self.model} {self.model_year}"
@@ -22,29 +24,11 @@ class Employee(models.Model):
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15)
-    #profile_picture = models.ImageField
+    profile_picture = models.ImageField(upload_to='profile-pictures/', blank=True, null=True)  # Allows image uploads for employees
 
     def __str__(self):
         return f"{self.name} {self.surname}"
     
-class Client(models.Model):
-
-    GENDER_CHOICES = [
-    ('M', 'Male'),
-    ('F', 'Female')
-    ]
-
-    #user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    surname = models.CharField(max_length=100)
-    phone_number = models.CharField(max_length=15)
-    address = models.CharField(max_length=255)
-    date_of_birth = models.DateField()
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    #profile_picture = models.ImageField
-
-    def __str__(self):
-        return f"{self.name} {self.surname}"
 
     
 
