@@ -65,6 +65,39 @@
             flex: 1;
             padding: 20px;
             background: var(--content-background-color);
+            display: flex;
+            flex-wrap: wrap; /* Allows multiple rows if needed */
+            justify-content: space-around; /* Centers and spaces out the car cards */
+        }
+
+        .car-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            width: 300px; /* Fixed width for alignment */
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center-aligns the content of the car card */
+        }
+
+        .car-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .car-card h2 {
+            font-size: 20px;
+            color: #333;
+            text-align: center; /* Centers the title */
+        }
+
+        .car-detail {
+            margin-bottom: 10px;
+            color: #666;
+            text-align: center; /* Centers the details */
         }
 
         footer {
@@ -86,19 +119,32 @@
             <ul>
                 <li><a href="/client_portal/client-home">Home</a></li>
                 <li><a href="/client_portal/carList">Cars</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Pricing</a></li>
-                <li class="signup-button"><a href="/signup">Sign Up</a></li>
-                <li class="login-button"><a href="/login">Login</a></li>
+                <li><a href="/client_portal/search-cars">Search</a></li>
+                <li><a href="/client_portal/aboutus">About Us</a></li>
+                <!--<li class="signup-button"><a href="/signup">Sign Up</a></li> -->
+                <!--<li class="login-button"><a href="/login">Login</a></li>-->
             </ul>
         </nav>
     </header>
 
     <main>
-        <h1>Welcome to Elite Motors</h1>
-        <p>This is where commercials will be showcased.</p>
-        <!-- Here you might include elements like a video player or image carousel for the commercials -->
+        <h1>Latest Cars</h1>
+        {% for car in latest_cars %}
+        <div class="car-card">
+            <img src="{{ car.image.url }}" alt="Image of {{ car.brand }} {{ car.model }}">
+            <h2>{{ car.brand }} {{ car.model }}</h2>
+            <p class="car-detail">Model Year: {{ car.model_year }}</p>
+            <p class="car-detail">Kilometres: {{ car.kilometres }} km</p>
+            <p class="car-detail">Color: {{ car.color }}</p>
+            <p class="car-detail">Engine: {{ car.engine_capacity }} L</p>
+            <p class="car-detail">Fuel: {{ car.fuel_type }}</p>
+            <p class="car-detail">Doors: {{ car.doors }}</p>
+            <p class="car-detail">Gearbox: {{ car.gearbox_type }}</p>
+            <p class="car-detail">Price: £{{ car.price }}</p>
+        </div>
+        {% empty %}
+        <p>No recent cars to display.</p>
+        {% endfor %}
     </main>
 
     <footer>
@@ -106,10 +152,8 @@
     </footer>
 
     <script>
-        // Simple script file
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Page loaded!');
-        });
+    
     </script>
+        
 </body>
 </html>

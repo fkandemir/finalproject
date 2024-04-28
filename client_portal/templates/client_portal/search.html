@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Car</title>
+    <title>Search</title>
     <!-- Import Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -16,7 +16,6 @@
             --footer-background-color: #2c3e50;
         }
 
-        /* Updated CSS styles for a more modern look */
         body {
             font-family: 'Open Sans', sans-serif;
             margin: 0;
@@ -27,51 +26,48 @@
             min-height: 100vh;
         }
 
-        .sidebar {
-            height: 100%;
-            width: 230px;
-            position: fixed;
-            background-color: var(--primary-color);
-            overflow-x: hidden;
-            padding-top: 20px;
-            border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-        }
-
-        .sidebar a {
-            padding: 25px 20px;
-            text-decoration: none;
-            font-size: 18px;
+        header {
+            background: var(--primary-color);
             color: var(--text-color);
-            display: block;
-            transition: all 0.3s ease;
+            padding: 10px 20px;
         }
 
-        .sidebar a:hover {
-            background-color: var(--hover-color);
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-right: 40px;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
             color: #fff;
+            text-decoration: underline;
         }
 
-        .sub-menu {
-            display: none;
-            padding-left: 40px;
-        }
-
-        .sub-menu.active {
-            display: block;
+        nav .signup-button, nav .login-button {
+            background: var(--hover-color);
+            padding: 5px 15px;
+            border-radius: 5px;
+            margin-left: auto;
         }
 
         .content {
             flex: 1;
-            margin-left: 240px;
             padding: 20px;
             background: var(--content-background-color);
-            border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
-            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-            transition: margin-left 0.3s ease;
+            flex-wrap: wrap; /* Allows multiple rows if needed */
         }
+
         .car-card {
             background-color: #fff;
             border-radius: 10px;
@@ -107,52 +103,35 @@
         }
         .car-detail {
             margin-bottom: 5px;
-            margin-right: 30px;
+            margin-right: 70px;
             color: #666;
         }
         .car-title {
             margin-right: 80px;
         }
         #title{
-            margin-left: 20px;
+            margin-left: 600px;
         }
-        footer {
-            background-color: var(--footer-background-color);
-            color: var(--text-color);
-            text-align: center;
-            padding: 20px;
-            width: 100%;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.1);
-            margin-top: auto;
-        }
-
-        /* Form styling */
-        form {
-            margin-top: 20px;
-        }
-
         .input-field {
-            width: 89%;
+            width: 59%;
             padding: 10px;
             margin-bottom: 20px;
             background: #f1f1f1;
+            margin-left: 260px;
             border: none;
             border-radius: 5px;
-            margin-left: 20px;
         }
 
         #submitbtn {
-            width: 90%;
+            width: 60%;
             padding: 10px;
             border: none;
             border-radius: 5px;
-            background-color: var(--primary-color);
-            color: #fff;
+            background-color: #2c3e50; /* Use a shade of your primary color */
+            color: #fff; /* White text color for contrast */
             cursor: pointer;
+            margin-left: 260px;
             transition: background-color 0.3s ease;
-            margin-left: 20px;
         }
 
         #submitbtn:hover {
@@ -163,28 +142,37 @@
             padding-right: 20px;
             vertical-align: middle;
         }
-
+        footer {
+            background: var(--footer-background-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 10px 20px;
+            width: 100%;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.1);
+            margin-top: auto;
+        }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <a href="/employee_portal/home"><span class="icon">🏠</span>Home</a>
-        <a id="asset-services"><span class="icon">🚗</span>Asset Services</a>
-        <div class="sub-menu">
-            <a href="/employee_portal/addCar">Add Car</a>
-            <a href="/employee_portal/searchCar">Search Car</a>
-            <a href="/employee_portal/deleteCar">Delete Car</a>
-            <a href="/employee_portal/editCar">Update Car</a>
-        </div>
-        <a href="/employee_portal/stock_list"><span class="icon">📦</span>Inventory</a>
-        <a href="/employee_portal/profile"><span class="icon">👤</span>Profile</a>
-        <a href="/employee_portal/logout_interface"><span class="icon">🔒</span>Logout</a>
-    </div>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/client_portal/client-home">Home</a></li>
+                <li><a href="/client_portal/carList">Cars</a></li>
+                <li><a href="/client_portal/search-cars">Search</a></li>
+                <li><a href="/client_portal/aboutus">About Us</a></li>
+                <!--<li class="signup-button"><a href="/signup">Sign Up</a></li> -->
+                <!--<li class="login-button"><a href="/login">Login</a></li>-->
+            </ul>
+        </nav>
+    </header>
 
     <div class="content">
         <h1 id="title">Search Cars</h1>
-        <form action="{% url 'searchCar' %}" method="get">
-            <input type="text" name="query" class="input-field" placeholder="Search cars by brand, model, or year..." value="{{ request.GET.query }}">
+        <form action="{% url 'search-cars' %}" method="get">
+            <input type="text" name="query" id="searchFiled" class="input-field" placeholder="Search cars by brand, model, year or price..." value="{{ request.GET.query }}">
             <button type="submit" id="submitbtn">Search</button>
         </form>
     
@@ -210,19 +198,14 @@
             <p>No results found.</p>
         {% endif %}
     </div>
-    
+
     <footer>
-        <p>&copy; 2024 Elite Motors Employee Portal. All rights reserved.</p>
+        <p>Copyright &copy; 2024 Elite Motors. All rights reserved.</p>
     </footer>
 
     <script>
-        // JavaScript to toggle sub-menu visibility
-        const assetServicesLink = document.getElementById('asset-services');
-        const subMenu = assetServicesLink.nextElementSibling;
-
-        assetServicesLink.addEventListener('click', () => {
-            subMenu.classList.toggle('active');
-        });
+    
     </script>
+        
 </body>
 </html>

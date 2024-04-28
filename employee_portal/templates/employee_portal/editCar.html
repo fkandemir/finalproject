@@ -35,6 +35,7 @@
             border-bottom-right-radius: 20px;
             box-shadow: 2px 0 5px rgba(0,0,0,0.1);
         }
+
         .sidebar a {
             padding: 25px 20px;
             text-decoration: none;
@@ -43,101 +44,94 @@
             display: block;
             transition: all 0.3s ease;
         }
+
         .sidebar a:hover {
             background-color: var(--hover-color);
             color: #fff;
         }
+
         .sub-menu {
             display: none;
             padding-left: 40px;
         }
+
         .sub-menu.active {
             display: block;
         }
         .content {
-            flex: 1;
             margin-left: 250px;
             padding: 20px;
             background: var(--content-background-color);
             border-top-right-radius: 20px;
             border-bottom-right-radius: 20px;
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-            transition: margin-left 0.3s ease;
         }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        label {
+            flex-basis: 30%;
+            margin-right: 2%;
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 68%; /* Adjust width of input fields */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        #saveChangesBtn {
+            width: auto;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #568203;
+            color: white;
+            cursor: pointer;
+            align-self: center;
+        }
+
+        #findCarBtn {
+            width: auto;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            align-self: center;
+        }
+
         footer {
             background-color: var(--footer-background-color);
             color: var(--text-color);
             text-align: center;
-            padding: 10px;
+            padding: 20px;
             width: 100%;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
             box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.1);
             margin-top: auto;
         }
-        footer a {
-            color: var(--text-color);
-            text-decoration: none;
-            margin: 0 3px;
-        }
-        footer a:not(:last-child):after {
-            content: '|';
-            margin-left: 12px;
-        }
-        input[type="text"], input[type="number"], select {
-            width: 80%;
-            padding: 10px;
-            margin-bottom: 20px;
-            background: #f1f1f1;
-            border: none;
-            border-radius: 5px;
-        }
-        button {
-            width: 82%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: var(--primary-color);
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: var(--hover-color);
-        }
-        #carCardContainer {
-            background-color: #fff;
-            display: none;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            padding: 20px;
-            width: calc(30% - 30px);
-            margin-bottom: 20px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        #carCardContainer h3 {
-            font-size: 20px;
-            color: #333;
-        }
-        #carCardContainer img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-        }
+
         @media (max-width: 768px) {
-            body {
+            .form-row {
                 flex-direction: column;
-                align-items: center;
             }
-            .car-card {
-                width: 90%;
+
+            label, input[type="text"], input[type="number"], select {
+                width: 100%;
             }
-        }
-        /* Add SVG icons to the sidebar */
-        .icon {
-            padding-right: 20px;
-            vertical-align: middle;
+
+            .content {
+                margin-left: 0;
+            }
         }
     </style>
 </head>
@@ -167,8 +161,6 @@
     </div>
 
     <footer>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
         <p>&copy; 2024 Elite Motors Employee Portal. All rights reserved.</p>
     </footer>
 
@@ -198,9 +190,7 @@
                         container.style.display = 'block';
                         container.innerHTML = `
                             <div>
-                                <img src="${data.image}.url" alt="Image of ${data.brand} ${data.model}">
                                 <h3>Edit Car: ${data.brand} ${data.model}</h3>
-                                <!-- Form for editing the car details -->
                                 <form id="updateCarForm">
                                     <input type="hidden" name="id" value="${data.id}">
                                     <label>Brand:</label>
@@ -229,7 +219,7 @@
                                     </select><br>
                                     <label>Price:</label>
                                     <input type="number" name="price" value="${data.price}"><br>
-                                    <button type="submit">Update Car</button>
+                                    <button id="saveChangesBtn" type="submit">Update Car</button>
                                 </form>
                             </div>
                         `;

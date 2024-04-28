@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cars</title>
+    <title>Elite Motors</title>
     <!-- Import Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -65,6 +65,39 @@
             flex: 1;
             padding: 20px;
             background: var(--content-background-color);
+            display: flex;
+            flex-wrap: wrap; /* Allows multiple rows if needed */
+            justify-content: space-around; /* Centers and spaces out the car cards */
+        }
+
+        .car-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            width: 300px; /* Fixed width for alignment */
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center-aligns the content of the car card */
+        }
+
+        .car-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .car-card h2 {
+            font-size: 20px;
+            color: #333;
+            text-align: center; /* Centers the title */
+        }
+
+        .car-detail {
+            margin-bottom: 10px;
+            color: #666;
+            text-align: center; /* Centers the details */
         }
 
         footer {
@@ -96,28 +129,38 @@
 
     <main>
         <div class="content">
-            <div class="brand-card" onclick="location.href='{% url 'allCars' %}'" style="cursor: pointer;">
-                <h2>List All</h2>
-            </div>
-            {% for brand in brands %}
-            <div class="brand-card" onclick="location.href='{% url 'cars_by_brand' brand.brand %}'" style="cursor: pointer;">
-                <h2>{{ brand.brand }} ({{ brand.count }})</h2>
-            </div>
-            {% empty %}
-            <p>No brands found.</p>
-            {% endfor %}
+            <h2>Our Story</h2>
+            <p>Elite Motors is a premier car dealership specializing in luxury and performance vehicles. Founded in 2005 by automotive enthusiasts John Smith and Jane Doe, Elite Motors has since grown to become one of the most trusted names in the industry.</p>
+            
+            <h2>Our Mission</h2>
+            <p>Our mission at Elite Motors is to provide exceptional service and quality vehicles to our customers. We strive to exceed expectations and deliver an unparalleled experience, from browsing our showroom to driving off in your dream car.</p>
+            
+            <h2>Our Team</h2>
+            <p>At Elite Motors, our team is comprised of passionate professionals who share a dedication to excellence. From our sales associates to our service technicians, each member of our team is committed to ensuring your satisfaction.</p>
+            
+            <h2>Visit Us</h2>
+            <p>We invite you to visit our showroom located at:</p>
+            <p>Elite Motors Ltd.</p>
+            <p>123 Main Street</p>
+            <p>City, Country</p>
+            
+            <h2>Contact Us</h2>
+            <p>Have questions or inquiries? Reach out to us:</p>
+            <p>Phone: +1234567890</p>
+            <p>Email: info@elitemotors.com</p>
+            <p>Fax: +1234567890</p>
         </div>
+
     </main>
+    
 
     <footer>
         <p>Copyright &copy; 2024 Elite Motors. All rights reserved.</p>
     </footer>
 
     <script>
-        // Simple script file
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Page loaded!');
-        });
+    
     </script>
+        
 </body>
 </html>
