@@ -15,4 +15,6 @@ AutoSellPro is a web application therefore it cannot be run and distributed like
 11. On another tab go to this address: http://127.0.0.1:8000/client_portal/client-home
 12. Now you can use the web app as you desire
 13. When you are done you can deactivate virtual environment by typing "conda deactivate" to the terminal
+
+github repo: https://github.com/fkandemir/finalproject
  
